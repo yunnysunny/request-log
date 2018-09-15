@@ -18,7 +18,7 @@ Print the express request log to console and save it to kafka when required, and
 
 ## Usage
 
-```
+```javascript
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
