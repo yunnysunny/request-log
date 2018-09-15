@@ -10,7 +10,6 @@ const {
     kafkaSchedule
 } = require('./config');
 const requestLog = require('../../../index');
-const {filter: requestValidator} = require('validator-param');
 
 const app = express();
 app.enable('trust proxy');
@@ -24,18 +23,6 @@ app.use(bodyParser.urlencoded({
     extended: false,
     limit: '1mb'
 }));
-
-
-// app.use(modifyParser);
-app.use(requestValidator({
-    basePath: path.join(__dirname, './validators'),
-    urlPrefix: '/i/',
-    filenameReplaces: {
-        '_': '/'
-    },
-    filenameSuffix: '_schema.js'
-}));
-
 
 
 app.use(express.static(path.join(__dirname, 'public')));
