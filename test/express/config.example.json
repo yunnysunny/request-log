@@ -1,0 +1,8 @@
+{
+    "port":7001,
+    "errorLogFile":"/home/travis/demo-error.log",
+    "kafkaConfig":{
+        "topic":"req-log",
+        "peers":"127.0.0.1:9092"
+    }
+}

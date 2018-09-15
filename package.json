@@ -1,0 +1,46 @@
+{
+  "name": "req-log",
+  "version": "0.0.1",
+  "description": "Print the express request log to console and save it to kafka when required, and even can send alram message when the response code greater than 500.",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc mocha --recursive test/mocha --timeout 999999 --exit",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "doc": "jsdoc2md index.js index.js > doc/api.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/yunnysunny/request-log.git"
+  },
+  "keywords": [
+    "express",
+    "request",
+    "log",
+    "kafka",
+    "alarm"
+  ],
+  "author": "yunnysunny",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yunnysunny/request-log/issues"
+  },
+  "homepage": "https://github.com/yunnysunny/request-log#readme",
+  "dependencies": {
+    "ip": "^1.1.5",
+    "node-slogger": "^1.0.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "config-settings": "^0.2.1",
+    "cookie-parser": "^1.4.3",
+    "coveralls": "^3.0.2",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "jsdoc-to-markdown": "^4.0.1",
+    "mocha": "^5.2.0",
+    "nyc": "^13.0.1",
+    "queue-schedule": "^0.5.3",
+    "supertest": "^3.3.0",
+    "validator-param": "^0.2.2"
+  }
+}
