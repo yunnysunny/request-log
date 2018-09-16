@@ -1,4 +1,4 @@
-# req-log
+# request-logging
 
 Print the express request log to console and save it to kafka when required, and even can send alram message when the response code greater than 500.
 
