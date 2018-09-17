@@ -3,10 +3,12 @@ const serverIp = require('ip').address();
 const pid = process.pid;
 /**
  * @module req-log
- * @param {Object=} kafkaSchedule The instance of class KafkaProducer from the package of [queue-schedule](https://npmjs.com/package/queue-schedule). 
- * @param {Object=} alarm The alarm object, it should has the function of sendAll.
+ * @param {Object} options
+ * @param {Object=} options.kafkaSchedule The instance of class KafkaProducer from the package of [queue-schedule](https://npmjs.com/package/queue-schedule). 
+ * @param {Object=} options.alarm The alarm object, it should has the function of sendAll.
  */
-module.exports = function({kafkaSchedule,alarm}) {
+module.exports = function(options={}) {
+    const {kafkaSchedule=null,alarm=null} = options;
     return function(req, res, next) {
         //记录请求时间
         const req_time = Date.now();
