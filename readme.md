@@ -2,11 +2,13 @@
 
 Print the express request log to console and save it to kafka when required, and even can send alram message when the response code greater than 500.
 
+[![npm version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
 [![David deps][david-image]][david-url]
 [![Test coverage][coveralls-image]][coveralls-url]
 [![node version][node-image]][node-url]
 
+[npm-image]: https://img.shields.io/npm/v/@yunnysunny/request-logging.svg?style=flat
 [npm-url]: https://npmjs.org/package/@yunnysunny/request-logging
 [travis-image]: https://img.shields.io/travis/yunnysunny/request-log.svg?style=flat-square
 [travis-url]: https://travis-ci.org/yunnysunny/request-log
@@ -17,7 +19,10 @@ Print the express request log to console and save it to kafka when required, and
 [coveralls-image]: https://img.shields.io/coveralls/yunnysunny/request-log.svg?style=flat-square
 [coveralls-url]: https://coveralls.io/r/yunnysunny/request-log?branch=master
 
-[![NPM](https://nodei.co/npm/@yunnysunny/request-logging.png?downloads=true)](https://nodei.co/npm/@yunnysunny/request-logging)  
+
+
+## Installation
+```npm install @yunnysunny/request-logging --save```
 
 ## Usage
 
@@ -25,14 +30,14 @@ Print the express request log to console and save it to kafka when required, and
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const requestLog = require('req-log');
+const requestLog = require('@yunnysunny/request-logging');
 
 const app = express();
 app.enable('trust proxy');
 
 // view engine setup
 app.set('port', port);
-app.use(requestLog({kafkaSchedule}));
+app.use(requestLog());
 
 app.use(bodyParser.json({limit: '1mb'}));
 app.use(bodyParser.urlencoded({
@@ -43,8 +48,8 @@ app.use(bodyParser.urlencoded({
 
 ## API
 
-See [api](doc/api.md) document.
+See [api](https://github.com/yunnysunny/request-log/blob/HEAD/doc/api.md) document.
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/yunnysunny/request-log/blob/HEAD/LICENSE)
