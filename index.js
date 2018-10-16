@@ -1,17 +1,19 @@
 const slogger = require('node-slogger');
 const serverIp = require('ip').address();
 const pid = process.pid;
+var req_id_count = 0;
 /**
  * @module req-log
  * @param {Object} options
  * @param {Object=} options.kafkaSchedule The instance of class KafkaProducer from the package of [queue-schedule](https://npmjs.com/package/queue-schedule). 
+ * @param {Object=} options.mongooseModel The instance of a mongoose Model to save the request log.
  * @param {Object=} options.alarm The alarm object, it should has the function of sendAll.
  */
-module.exports = function(options={}) {
-    const {kafkaSchedule=null,alarm=null} = options;
+module.exports = function({kafkaSchedule=null,mongooseModel=null,alarm=null}={}) {
     return function(req, res, next) {
         //记录请求时间
         const req_time = Date.now();
+        const req_id = req_id_count++;
         res.on('finish', function() {
             //记录响应时间
             const now = Date.now();
@@ -31,7 +33,7 @@ module.exports = function(options={}) {
             const referer = req.get('referer') || '';
             const session = req.session;
             
-            if (kafkaSchedule) {
+            if (kafkaSchedule || mongooseModel) {
                 const data = {
                     host,
                     original_url,
@@ -41,6 +43,7 @@ module.exports = function(options={}) {
                     ip,
                     duration,
                     pid,
+                    req_id,
                     content_length,
                     status_code,
                     req_time,
@@ -49,7 +52,16 @@ module.exports = function(options={}) {
                     session,
                     created_at: now
                 };
-                kafkaSchedule.addData(data);
+                if (kafkaSchedule) {
+                    kafkaSchedule.addData(data);
+                }
+                if (mongooseModel) {
+                    new mongooseModel(data).save(function(err) {
+                        if (err) {
+                            slogger.error('save request log to mongodb failed',err);
+                        }
+                    });
+                }
             }
             
             if (alarm) {

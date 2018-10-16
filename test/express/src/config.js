@@ -1,5 +1,6 @@
 const slogger = require('node-slogger');
 const {KafkaProducer} = require('queue-schedule');
+const mongoose = require('mongoose');
 const configObj = require('../config.json');
 const settings = require('config-settings').init(configObj);
 
@@ -25,6 +26,7 @@ exports.kafkaSchedule = new KafkaProducer({
     delayInterval:1000,
     kafkaHost:kafkaHost
 });
-// let mongoConfig = settings.loadNecessaryObject('mongoConfig');
-// mongoose.Promise = global.Promise;
-// mongoose.connect(mongoConfig.url, mongoConfig.option); // connect to database
+let mongoConfig = settings.loadNecessaryObject('mongoConfig');
+mongoose.Promise = global.Promise;
+mongoose.connect(mongoConfig.url, mongoConfig.option); // connect to database
+exports.requestLogModel = mongoose.model('RequestLog',require('./schemas/request_log_schema'));

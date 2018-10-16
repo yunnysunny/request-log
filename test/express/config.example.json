@@ -4,5 +4,9 @@
     "kafkaConfig":{
         "topic":"req-log",
         "peers":"127.0.0.1:9092"
+    },
+    "mongoConfig" : {
+        "option" : {"useMongoClient": true},
+        "url" : "mongodb://localhost/test"
     }
 }

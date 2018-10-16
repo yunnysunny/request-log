@@ -1,5 +1,8 @@
 language: node_js
 
+services:
+  - mongodb
+
 before_install:
   - jdk_switcher use oraclejdk8
   - java -version

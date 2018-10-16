@@ -1,3 +1,8 @@
+# v0.2.0
+## Add
+1. Saving request logging to mongodb.
+2. Add the filed `req_id`.
+
 # v0.1.1
 ## Fix
 1. Fixed the issue of broken when not given the default parameter.
