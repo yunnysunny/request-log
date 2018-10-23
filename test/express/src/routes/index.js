@@ -16,4 +16,9 @@ router.get('/login-check',function(req, res) {
     
 });
 
+router.get('/do-get-res-code',function(req, res) {
+    res.set('res-code',1000);
+    res.sendStatus(200);
+});
+
 module.exports = router;

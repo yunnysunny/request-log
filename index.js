@@ -27,6 +27,7 @@ module.exports = function({kafkaSchedule=null,mongooseModel=null,alarm=null}={})
             const path = req.path;
             const content_length = res._contentLength;
             const status_code = res.statusCode;
+            const res_code = Number(res.get('res-code')) || 0;
             const req_data = method === 'POST' ?
                 req.body :
                 req.query;
@@ -46,6 +47,7 @@ module.exports = function({kafkaSchedule=null,mongooseModel=null,alarm=null}={})
                     req_id,
                     content_length,
                     status_code,
+                    res_code,
                     req_time,
                     req_data,
                     referer,

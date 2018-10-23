@@ -67,6 +67,7 @@ If you want to save request logging to mongodb, this is the fields description, 
 | req_id         | Number | The inner request number, auto increased when new request come. |
 | content_length | Number | The content-length of the response headers.                  |
 | status_code    | Number | The status code of current HTTP response.                    |
+| res_code       | Number | The inner response code, which will be got from the response header of `res-code`. |
 | req_time       | Number | The timestamp of begin time of current request occured.      |
 | req_data       | Object | The request data, which would form query string or form data. |
 | referer        | String | The HTTP referer header.                                     |

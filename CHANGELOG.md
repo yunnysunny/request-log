@@ -1,3 +1,7 @@
+# v0.3.0
+## Add
+1. Add the field `res-code` .
+
 # v0.2.0
 ## Add
 1. Saving request logging to mongodb.
