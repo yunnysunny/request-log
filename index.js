@@ -14,7 +14,9 @@ module.exports = function({kafkaSchedule=null,mongooseModel=null,alarm=null}={})
         //记录请求时间
         const req_time = Date.now();
         const req_id = req_id_count++;
-        res.on('finish', function() {
+        const origianlEnd = res.end;
+        res.end = function() {
+            origianlEnd.apply(res,arguments);
             //记录响应时间
             const now = Date.now();
             const duration = now - req_time;
@@ -78,7 +80,10 @@ module.exports = function({kafkaSchedule=null,mongooseModel=null,alarm=null}={})
     
             
             slogger.info(`${ip} ${duration} ms "${method} ${original_url} HTTP/${req.httpVersion}" ${status_code} ${content_length} "${referer}" "${user_agent}`);
-        });
+        };
+        // res.on('finish', function() {
+            
+        // });
     
         next();
     };

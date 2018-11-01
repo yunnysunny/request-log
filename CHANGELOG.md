@@ -1,3 +1,7 @@
+# v0.4.0
+## Fix
+1. In some condition, the event of `finish` will not trigger, so I overwrite the `end` function of `res` to fix it.
+
 # v0.3.0
 ## Add
 1. Add the field `res-code` .

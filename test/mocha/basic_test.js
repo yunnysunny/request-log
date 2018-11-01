@@ -1,5 +1,5 @@
 const request = require('supertest');
-// const {expect} = require('chai');
+const {expect} = require('chai');
 const app = require('../express/src/app');
 
 let cookie = '';
@@ -22,6 +22,7 @@ describe('basic test',function() {
                 if (err) {
                     return done(err);
                 }
+                expect(res.body).to.have.property('code').and.equal(0);
                 var header = res.header;
                 var setCookieArray = header['set-cookie'];
 

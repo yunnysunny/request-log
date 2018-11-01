@@ -5,7 +5,7 @@ router.get('/', function(req, res) {
 });
 router.get('/do-login', function(req, res) {
     req.session.user = {name:'test',user_type:1};
-    res.send('welcome home');
+    res.send({code:0});
 });
 router.get('/login-check',function(req, res) {
     if (req.session && req.session.user && req.session.user.name === 'test') {
