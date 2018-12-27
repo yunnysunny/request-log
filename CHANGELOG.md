@@ -1,4 +1,4 @@
-# 0.5.0
+# v0.5.0
 ## Add
 1. Don't send alarm message when status code is greater than 600.
 
