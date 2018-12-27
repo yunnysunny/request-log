@@ -1,3 +1,7 @@
+# 0.5.0
+## Add
+1. Don't send alarm message when status code is greater than 600.
+
 # v0.4.0
 ## Fix
 1. In some condition, the event of `finish` will not trigger, so I overwrite the `end` function of `res` to fix it.

@@ -69,7 +69,7 @@ module.exports = function({kafkaSchedule=null,mongooseModel=null,alarm=null}={})
             }
             
             if (alarm) {
-                if (status_code >= 500) {
+                if (status_code >= 500 && status_code < 600) {
                     alarm.sendAll(`client-server:${status_code}:${serverIp}:${original_url}`, function(err) {
                         if (err) {
                             slogger.error('发送警告数据时报错', err);
