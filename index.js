@@ -79,7 +79,7 @@ module.exports = function({kafkaSchedule=null,mongooseModel=null,alarm=null}={})
             }
     
             
-            slogger.info(`${ip} ${duration} ms "${method} ${original_url} HTTP/${req.httpVersion}" ${status_code} ${content_length} "${referer}" "${user_agent}`);
+            slogger.info(`${ip} ${duration} ms "${method} ${original_url} HTTP/${req.httpVersion}" ${status_code} ${content_length} "${referer}" "${user_agent}"`);
         };
         // res.on('finish', function() {
             

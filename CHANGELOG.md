@@ -1,3 +1,7 @@
+# v0.5.2
+## Fix 
+1. Fix the lack of the right semicolon of user agent string.
+
 # v0.5.1
 ## Improved
 1. Remove unnecessary message of alarm.
