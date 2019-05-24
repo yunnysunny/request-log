@@ -2,16 +2,10 @@ language: node_js
 
 services:
   - mongodb
+  - docker
 
 before_install:
-  - jdk_switcher use oraclejdk8
-  - java -version
-  - wget http://www-us.apache.org/dist/kafka/0.11.0.3/kafka_2.11-0.11.0.3.tgz -O kafka.tgz
-  - mkdir -p kafka && tar xzf kafka.tgz -C kafka --strip-components 1
-  - nohup bash -c "cd kafka && bin/zookeeper-server-start.sh config/zookeeper.properties &"
-  - nohup bash -c "cd kafka && bin/kafka-server-start.sh config/server.properties &"
-  - sleep 7
-  - kafka/bin/kafka-topics.sh --create --partitions 1 --replication-factor 1 --topic req-log --zookeeper localhost:2181
+  - ./run_docker.sh
 
 before_script:
   - cp test/express/config.example.json test/express/config.json
@@ -27,4 +21,3 @@ node_js:
 cache:
   directories:
     - "node_modules"
-    - "kafka"
