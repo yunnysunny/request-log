@@ -25,7 +25,7 @@ module.exports = function({kafkaSchedule=null,mongooseModel=null,alarm=null}={})
             const ip = req.ip;
             const original_url = req.originalUrl;
             const user_agent = req.get('User-Agent') || '';
-            const host = req.hostname;
+            const hostname = req.hostname;
             const path = req.path;
             const content_length = res._contentLength;
             const status_code = res.statusCode;
@@ -38,12 +38,13 @@ module.exports = function({kafkaSchedule=null,mongooseModel=null,alarm=null}={})
             
             if (kafkaSchedule || mongooseModel) {
                 const data = {
-                    host,
+                    hostname,
                     original_url,
                     path,
                     user_agent,
                     method,
                     ip,
+                    host:serverIp,
                     duration,
                     pid,
                     req_id,

@@ -56,12 +56,13 @@ If you want to save request logging to mongodb, this is the fields description, 
 
 | name           | type   | description                                                  |
 | -------------- | ------ | ------------------------------------------------------------ |
-| host           | String | The server's ip.                                             |
+| hostname       | String | The domain of current server.                                |
 | original_url   | String | The original url contains query string.                      |
 | path           | String | The request path doesn't contain query string.               |
 | user_agent     | String | The user agent.                                              |
 | method         | String | The http request method.                                     |
 | ip             | String | The client's ip.                                             |
+| host           | String | The server's ip.                                             |
 | duration       | Number | The millisecond the request costed.                          |
 | pid            | Number | The server's process id.                                     |
 | req_id         | Number | The inner request number, auto increased when new request come. |

@@ -1,3 +1,9 @@
+# 0.6.0
+## Fix 
+1. Fix the value of `host`, see the issue [#1](https://github.com/yunnysunny/request-log/issues/1).
+## Add
+1. Add the key of `hostname` to indicate the domain of current server.
+
 # v0.5.2
 ## Fix 
 1. Fix the lack of the right semicolon of user agent string.
