@@ -1,4 +1,4 @@
-# 0.6.0
+# v0.6.0
 ## Fix 
 1. Fix the value of `host`, see the issue [#1](https://github.com/yunnysunny/request-log/issues/1).
 ## Add
