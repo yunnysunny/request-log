@@ -1,3 +1,9 @@
+# v0.7.0
+## Add
+1. Add the key of `req_time_string`, formated in [ISO 8601 Extended Format](https://en.wikipedia.org/wiki/ISO_8601).
+## Improved
+1. Bump node-slogger to 2.0.0 .
+
 # v0.6.0
 ## Fix 
 1. Fix the value of `host`, see the issue [#1](https://github.com/yunnysunny/request-log/issues/1).

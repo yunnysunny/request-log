@@ -12,7 +12,9 @@ var req_id_count = 0;
 module.exports = function({kafkaSchedule=null,mongooseModel=null,alarm=null}={}) {
     return function(req, res, next) {
         //记录请求时间
-        const req_time = Date.now();
+        const date = new Date();
+        const req_time = date.getTime();
+        const req_time_string = date.toISOString();
         const req_id = req_id_count++;
         const origianlEnd = res.end;
         res.end = function() {
@@ -52,6 +54,7 @@ module.exports = function({kafkaSchedule=null,mongooseModel=null,alarm=null}={})
                     status_code,
                     res_code,
                     req_time,
+                    req_time_string,
                     req_data,
                     referer,
                     session,
