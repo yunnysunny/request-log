@@ -4,11 +4,16 @@ const request = require('supertest');
 const {expect} = require('chai');
 const rand = Math.random();
 const reqUrl = '/?rand='+rand;
-const {requestLogModel} = require('../express/src/config');
+const {
+    requestLogModel,
+    CUSTOM_HEADER_KEY_MY_ID
+} = require('../express/src/config');
+const MY_ID = Math.random() + '';
 describe('mongodb test:',function() {
     it('sucess when request ' + reqUrl + ' ok',function(done) {
         request(app)
             .get(reqUrl)
+            .set(CUSTOM_HEADER_KEY_MY_ID, MY_ID)
             .expect(200)
             .end(function(err) {
                 if (err) {
@@ -18,7 +23,7 @@ describe('mongodb test:',function() {
             });
     });
     it('the lastest url is ' + reqUrl,function(done) {
-        requestLogModel.findOne({},{original_url:1},{
+        requestLogModel.findOne({},{original_url:1, custom_headers: 1},{
             sort:{_id:-1},lean:true
         },function(err,item) {
             if (err) {
@@ -28,6 +33,7 @@ describe('mongodb test:',function() {
                 return done('save to mongo failed');
             }
             expect(item.original_url).equal(reqUrl);
+            expect(item.custom_headers).to.have.property(CUSTOM_HEADER_KEY_MY_ID).and.equal(MY_ID);
             done();
         });
     });

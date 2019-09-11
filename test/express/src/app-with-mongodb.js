@@ -7,7 +7,8 @@ const routes = require('./routes/index');
 const {
     slogger,
     port,
-    requestLogModel
+    requestLogModel,
+    CUSTOM_HEADER_KEY_MY_ID
 } = require('./config');
 const requestLog = require('../../../index');
 
@@ -16,7 +17,7 @@ app.enable('trust proxy');
 
 // view engine setup
 app.set('port', port);
-app.use(requestLog({mongooseModel:requestLogModel}));
+app.use(requestLog({mongooseModel:requestLogModel,customHeaderKeys: [CUSTOM_HEADER_KEY_MY_ID]}));
 
 app.use(bodyParser.json({limit: '1mb'}));
 app.use(bodyParser.urlencoded({

@@ -1,3 +1,7 @@
+# v0.8.0
+## Add
+1. Add the parameter of `customHeaderKeys` , which indicate the specific headers to store into mongo and kafka.
+
 # v0.7.0
 ## Add
 1. Add the key of `req_time_string`, formated in [ISO 8601 Extended Format](https://en.wikipedia.org/wiki/ISO_8601).

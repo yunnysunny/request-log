@@ -8,8 +8,9 @@ var req_id_count = 0;
  * @param {Object=} options.kafkaSchedule The instance of class KafkaProducer from the package of [queue-schedule](https://npmjs.com/package/queue-schedule). 
  * @param {Object=} options.mongooseModel The instance of a mongoose Model to save the request log.
  * @param {Object=} options.alarm The alarm object, it should has the function of sendAll.
+ * @param {String[]} [options.customHeaderKeys=[]] The data indicates the specific headers to store into mongo and kafka.
  */
-module.exports = function({kafkaSchedule=null,mongooseModel=null,alarm=null}={}) {
+module.exports = function({kafkaSchedule=null,mongooseModel=null,alarm=null,customHeaderKeys=[]}={}) {
     return function(req, res, next) {
         //记录请求时间
         const date = new Date();
@@ -39,11 +40,19 @@ module.exports = function({kafkaSchedule=null,mongooseModel=null,alarm=null}={})
             const session = req.session;
             
             if (kafkaSchedule || mongooseModel) {
+                const custom_headers = {};
+                if (customHeaderKeys && customHeaderKeys.length > 0) {
+                    for (var i=0,len=customHeaderKeys.length;i<len;i++) {
+                        const key = customHeaderKeys[i];
+                        custom_headers[key] = req.get(key);
+                    }
+                }
                 const data = {
                     hostname,
                     original_url,
                     path,
                     user_agent,
+                    custom_headers,
                     method,
                     ip,
                     host:serverIp,

@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const configObj = require('../config.json');
 const settings = require('config-settings').init(configObj);
 
+exports.CUSTOM_HEADER_KEY_MY_ID = 'my-id';
 exports.port = settings.loadNecessaryInt('port');
 
 //保证配置文件中的debugfilename属性存在，且其所在目录在当前硬盘中存在
