@@ -33,6 +33,7 @@ module.exports = function({kafkaSchedule=null,mongooseModel=null,alarm=null,cust
             const content_length = res._contentLength;
             const status_code = res.statusCode;
             const res_code = Number(res.get('res-code')) || 0;
+            const content_length_req = Number(req.get('content-length')) || 0;
             const req_data = method === 'POST' ?
                 req.body :
                 req.query;
@@ -59,6 +60,7 @@ module.exports = function({kafkaSchedule=null,mongooseModel=null,alarm=null,cust
                     duration,
                     pid,
                     req_id,
+                    content_length_req,
                     content_length,
                     status_code,
                     res_code,
@@ -92,7 +94,7 @@ module.exports = function({kafkaSchedule=null,mongooseModel=null,alarm=null,cust
             }
     
             
-            slogger.info(`${ip} ${duration} ms "${method} ${original_url} HTTP/${req.httpVersion}" ${status_code} ${content_length} "${referer}" "${user_agent}"`);
+            slogger.info(`${ip} ${duration} ms ${content_length_req} "${method} ${original_url} HTTP/${req.httpVersion}" ${status_code} ${content_length} "${referer}" "${user_agent}"`);
         };
         // res.on('finish', function() {
             

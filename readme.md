@@ -67,6 +67,7 @@ If you want to save request logging to mongodb, this is the fields description, 
 | duration       | Number | The millisecond the request costed.                          |
 | pid            | Number | The server's process id.                                     |
 | req_id         | Number | The inner request number, auto increased when new request come. |
+| content_length_req | Number | The content-length of the request headers.                  |
 | content_length | Number | The content-length of the response headers.                  |
 | status_code    | Number | The status code of current HTTP response.                    |
 | res_code       | Number | The inner response code, which will be got from the response header of `res-code`. |
