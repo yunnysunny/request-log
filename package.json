@@ -1,6 +1,6 @@
 {
   "name": "@yunnysunny/request-logging",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "Print the express request log to console and save it to kafka when required, and even can send alram message when the response code greater than 500.",
   "main": "index.js",
   "scripts": {

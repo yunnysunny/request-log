@@ -6,7 +6,8 @@ const settings = require('config-settings').init(configObj);
 
 exports.CUSTOM_HEADER_KEY_MY_ID = 'my-id';
 exports.port = settings.loadNecessaryInt('port');
-
+exports.TO_FORMAT_FIELD = 'myformat';
+exports.FORMAT_SUFFIX = '_format';
 //保证配置文件中的debugfilename属性存在，且其所在目录在当前硬盘中存在
 
 const errorFile = settings.loadNecessaryFile('errorLogFile', true);

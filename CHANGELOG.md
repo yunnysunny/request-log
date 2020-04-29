@@ -1,3 +1,7 @@
+# v0.10.0
+## Add
+1. Add the parameter of `dataFormat` to resolve the conflict occured in elasticsearch.
+
 # v0.9.0
 ## Add
 1. Add the key of `content_length_req` to indicate the length of the request.

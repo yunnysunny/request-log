@@ -2,6 +2,18 @@ const slogger = require('node-slogger');
 const serverIp = require('ip').address();
 const pid = process.pid;
 var req_id_count = 0;
+
+function _dataFormat(data) {
+    return data;
+}
+/**
+ * The default format function
+ * @function FormatFunction
+ * 
+ * @param {Object} data The original data.
+ * @return {Object} The data after format.
+ */
+
 /**
  * @module req-log
  * @param {Object} options
@@ -9,8 +21,15 @@ var req_id_count = 0;
  * @param {Object=} options.mongooseModel The instance of a mongoose Model to save the request log.
  * @param {Object=} options.alarm The alarm object, it should has the function of sendAll.
  * @param {String[]} [options.customHeaderKeys=[]] The data indicates the specific headers to store into mongo and kafka.
+ * @param {FormatFunction=} options.dataFormat The custom data format function, it use to resolve the conflict occured in elasticsearch.
  */
-module.exports = function({kafkaSchedule=null,mongooseModel=null,alarm=null,customHeaderKeys=[]}={}) {
+module.exports = function({
+    kafkaSchedule=null,
+    mongooseModel=null,
+    alarm=null,
+    customHeaderKeys=[],
+    dataFormat=_dataFormat
+}={}) {
     return function(req, res, next) {
         //记录请求时间
         const date = new Date();
@@ -34,9 +53,10 @@ module.exports = function({kafkaSchedule=null,mongooseModel=null,alarm=null,cust
             const status_code = res.statusCode;
             const res_code = Number(res.get('res-code')) || 0;
             const content_length_req = Number(req.get('content-length')) || 0;
-            const req_data = method === 'POST' ?
+            const req_data_original = method === 'POST' ?
                 req.body :
                 req.query;
+            const req_data = dataFormat(req_data_original);
             const referer = req.get('referer') || '';
             const session = req.session;
             
