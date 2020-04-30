@@ -76,6 +76,7 @@ If you want to save request logging to mongodb, this is the fields description, 
 | req_data       | Object | The request data, which would form query string or form data. |
 | referer        | String | The HTTP referer header.                                     |
 | session        | Object | The session of current request.                              |
+| aborted        | Boolean| Whether the request has aborted.                             | 
 
 We suggest you use such mongoose schema, which is compatible when the fields is changed:
 

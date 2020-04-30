@@ -1,3 +1,7 @@
+# v0.11.0
+## Add
+1. Add the field of `aborted` to indicate whether the request is aborted.
+
 # v0.10.0
 ## Add
 1. Add the parameter of `dataFormat` to resolve the conflict occured in elasticsearch.

@@ -63,4 +63,48 @@ describe('mongodb test:',function() {
             done();
         });
     });
+
+    it('abort the request ' + reqUrl,function(done) {
+        var hasDone = false;
+        request(app)
+            .get('/abort')
+            .query({abort:true})
+            // .expect(200)
+            .abort()
+            .end(function(err) {
+                if (err) {
+                    if (hasDone) {
+                        return;
+                    }
+                    hasDone = true;
+                    return done(err);
+                }
+                if (!hasDone) {
+                    done();
+                    hasDone = true;
+                }
+                
+            });
+        setTimeout(function() {
+            if (!hasDone) {
+                done();
+                hasDone = true;
+            }
+        }, 1000);
+    });
+
+    it('get abort requst', function(done) {
+        requestLogModel.findOne({},{req_data:1, aborted: 1},{
+            sort:{_id:-1},lean:true
+        },function(err,item) {
+            if (err) {
+                return done(err);
+            }
+            if (!item) {
+                return done('save to mongo failed');
+            }
+            expect(item.aborted).to.be.equal(true);
+            done();
+        });
+    });
 });

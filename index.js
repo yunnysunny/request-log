@@ -37,8 +37,9 @@ module.exports = function({
         const req_time_string = date.toISOString();
         const req_id = req_id_count++;
         const origianlEnd = res.end;
-        res.end = function() {
-            origianlEnd.apply(res,arguments);
+        var aborted = false;
+
+        function doLog() {
             //记录响应时间
             const now = Date.now();
             const duration = now - req_time;
@@ -89,6 +90,7 @@ module.exports = function({
                     req_data,
                     referer,
                     session,
+                    aborted,
                     created_at: now
                 };
                 if (kafkaSchedule) {
@@ -115,11 +117,22 @@ module.exports = function({
     
             
             slogger.info(`${ip} ${duration} ms ${content_length_req} "${method} ${original_url} HTTP/${req.httpVersion}" ${status_code} ${content_length} "${referer}" "${user_agent}"`);
+        }
+
+        res.end = function() {
+            origianlEnd.apply(res,arguments);
+            doLog();
         };
         // res.on('finish', function() {
             
         // });
-    
+        req.on('aborted',function() {
+            aborted = true;
+            doLog();
+        });
+        req.on('error', function() {
+            doLog();
+        });
         next();
     };
 }; 

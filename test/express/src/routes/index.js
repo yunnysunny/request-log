@@ -21,4 +21,9 @@ router.get('/do-get-res-code',function(req, res) {
     res.sendStatus(200);
 });
 
+router.get('/abort',function(req, res) {
+    req.socket.destroy();
+    res.send('not sended');
+});
+
 module.exports = router;
