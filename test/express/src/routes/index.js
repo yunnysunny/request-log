@@ -1,5 +1,7 @@
 const express = require('express');
+const multipart = require('connect-multiparty');
 const router = express.Router();
+const multipartMiddleware = multipart({ uploadDir: 'path' });
 router.get('/', function(req, res) {
     res.sendStatus(200);
 });
@@ -24,6 +26,10 @@ router.get('/do-get-res-code',function(req, res) {
 router.get('/abort',function(req, res) {
     req.socket.destroy();
     res.send('not sended');
+});
+
+router.post('/post', multipartMiddleware, function(req, res) {
+    res.send(req.body);
 });
 
 module.exports = router;
