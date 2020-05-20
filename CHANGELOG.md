@@ -1,3 +1,7 @@
+# v0.11.1
+## Fix
+1. Fix the issue of https://github.com/yunnysunny/request-log/issues/2
+
 # v0.11.0
 ## Add
 1. Add the field of `aborted` to indicate whether the request is aborted.
