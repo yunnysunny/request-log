@@ -1,5 +1,6 @@
 const request = require('supertest');
 const {expect} = require('chai');
+const path = require('path');
 const app = require('../express/src/app');
 
 let cookie = '';
@@ -51,5 +52,20 @@ describe('basic test',function() {
                 }
                 done();
             });
+    });
+    it('request with error content length',function(done) {
+        request(app)
+            .post('/post')
+            .field('my_f', 'ff')
+            .attach('my_file', path.join(__dirname, '../files/test.txt'))
+            .expect(400)
+            .end(function(err) {
+                if (err) {
+                    return done(err);
+                }
+                done();
+            });
+        
+
     });
 });

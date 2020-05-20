@@ -31,17 +31,21 @@ module.exports = function({
     dataFormat=_dataFormat
 }={}) {
     return function(req, res, next) {
-        //记录请求时间
+        //begin
         const date = new Date();
         const req_time = date.getTime();
         const req_time_string = date.toISOString();
         const req_id = req_id_count++;
-        const origianlEnd = res.end;
+        // const origianlEnd = res.end;
         var aborted = false;
+        var hasLoged = false;
 
         function doLog() {
-            //记录响应时间
-            const now = Date.now();
+            if (hasLoged) {
+                return slogger.trace('has loged');
+            }
+
+            const now = Date.now();//end
             const duration = now - req_time;
             const method = req.method;
             
@@ -50,7 +54,7 @@ module.exports = function({
             const user_agent = req.get('User-Agent') || '';
             const hostname = req.hostname;
             const path = req.path;
-            const content_length = res._contentLength;
+            const content_length = res.get('content-length') || -1;
             const status_code = res.statusCode;
             const res_code = Number(res.get('res-code')) || 0;
             const content_length_req = Number(req.get('content-length')) || 0;
@@ -119,19 +123,22 @@ module.exports = function({
             slogger.info(`${ip} ${duration} ms ${content_length_req} "${method} ${original_url} HTTP/${req.httpVersion}" ${status_code} ${content_length} "${referer}" "${user_agent}"`);
         }
 
-        res.end = function() {
-            origianlEnd.apply(res,arguments);
+        // res.end = function() {
+        //     origianlEnd.apply(res,arguments);
+        //     doLog();
+        // };
+        res.on('finish', function() {
             doLog();
-        };
-        // res.on('finish', function() {
-            
-        // });
+            hasLoged = true;
+        });
         req.on('aborted',function() {
             aborted = true;
             doLog();
+            hasLoged = true;
         });
         req.on('error', function() {
             doLog();
+            hasLoged = true;
         });
         next();
     };
