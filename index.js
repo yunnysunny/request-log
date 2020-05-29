@@ -11,6 +11,7 @@ function _dataFormat(data) {
  * @function FormatFunction
  * 
  * @param {Object} data The original data.
+ * @param {Boolean=} isFromResponse Whether the data is from response.
  * @return {Object} The data after format.
  */
 
@@ -64,6 +65,7 @@ module.exports = function({
             const req_data = dataFormat(req_data_original);
             const referer = req.get('referer') || '';
             const session = req.session;
+            const res_data = dataFormat(res._res_data || {}, true);
             
             if (kafkaSchedule || mongooseModel) {
                 const custom_headers = {};
@@ -89,6 +91,7 @@ module.exports = function({
                     content_length,
                     status_code,
                     res_code,
+                    res_data,
                     req_time,
                     req_time_string,
                     req_data,

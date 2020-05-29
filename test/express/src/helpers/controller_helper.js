@@ -3,7 +3,9 @@ exports.callService = function(req, res, service,...args) {
         if (err) {
             return res.send(err);
         }
-        res.send({code:0,data});
+        const result = {code:0,data};
+        res._res_data = result;
+        res.send(result);
     });
     service(...args);
 };

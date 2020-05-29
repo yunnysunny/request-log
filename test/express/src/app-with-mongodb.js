@@ -11,7 +11,7 @@ const {
     CUSTOM_HEADER_KEY_MY_ID
 } = require('./config');
 const requestLog = require('../../../index');
-
+require('./plugins/reponse');
 const app = express();
 app.enable('trust proxy');
 

@@ -1,5 +1,5 @@
 const app = require('../express/src/app-with-mongodb');
-
+// const path = require('path');
 const request = require('supertest');
 const {expect} = require('chai');
 const rand = Math.random();
@@ -107,4 +107,35 @@ describe('mongodb test:',function() {
             done();
         });
     });
+    it('request with error content length',function(done) {
+        
+        const data = {rand:MY_ID};
+        request(app)
+            .post('/echo')
+            .send(data)
+            .expect(200)
+            .end(function(err) {
+                if (err) {
+                    return done(err);
+                }
+                done();
+            });
+
+    });
+    it('get res_data success',function(done) {
+        requestLogModel.findOne({},{original_url:1,res_code:1, res_data:1},{
+            sort:{_id:-1},lean:true
+        },function(err,item) {
+            if (err) {
+                return done(err);
+            }
+            if (!item) {
+                return done('save to mongo failed');
+            }
+            expect(item.original_url).equal('/echo');
+            expect(item.res_data.data.rand).equal(MY_ID);
+            done();
+        });
+    });
+
 });

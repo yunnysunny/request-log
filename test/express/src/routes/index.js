@@ -2,6 +2,7 @@ const express = require('express');
 const multipart = require('connect-multiparty');
 const router = express.Router();
 const multipartMiddleware = multipart({ uploadDir: 'path' });
+const {callService} = require('../helpers/controller_helper');
 router.get('/', function(req, res) {
     res.sendStatus(200);
 });
@@ -30,6 +31,15 @@ router.get('/abort',function(req, res) {
 
 router.post('/post', multipartMiddleware, function(req, res) {
     res.send(req.body);
+});
+
+function echoService (data, callback) {
+    callback(null,data);
+}
+
+router.post('/echo', function(req, res) {
+    // res.send(req.body);
+    callService(req, res, echoService, req.body);
 });
 
 module.exports = router;
