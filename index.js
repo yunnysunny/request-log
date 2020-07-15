@@ -65,7 +65,7 @@ module.exports = function({
             const req_data = dataFormat(req_data_original);
             const referer = req.get('referer') || '';
             const session = req.session;
-            const res_data = dataFormat(res._res_data || {}, true);
+            const res_data = dataFormat(res._res_data, true);
             
             if (kafkaSchedule || mongooseModel) {
                 const custom_headers = {};

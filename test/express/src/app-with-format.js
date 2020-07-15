@@ -22,7 +22,10 @@ app.set('port', port);
 app.use(requestLog({
     mongooseModel:requestLogModel,
     customHeaderKeys: [CUSTOM_HEADER_KEY_MY_ID],
-    dataFormat: function(data) {
+    dataFormat: function(data, isFromRes) {
+        if (isFromRes) {
+            return;
+        }
         data[TO_FORMAT_FIELD] = (data[TO_FORMAT_FIELD] || '') + FORMAT_SUFFIX;
         return data;
     }

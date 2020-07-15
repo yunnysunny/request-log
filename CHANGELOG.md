@@ -1,3 +1,7 @@
+# v0.12.1
+## Remove
+1. Remove the default value of response data. You should avoid reading undefined object in `dataFormat` function when format response data.
+
 # v0.12.0
 ## Add
 1. Add the field of `res_data`, which contains the reponse data.
