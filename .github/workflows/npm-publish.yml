@@ -20,6 +20,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16
+      - run: cp test/express/config.example.json test/express/config.json
       - run: ./run_docker.sh
       - run: yarn install
       - run: npm test
