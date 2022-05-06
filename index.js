@@ -8,23 +8,23 @@ function _dataFormat(data) {
 }
 /**
  * The default format function
- * @function FormatFunction
+ * @callback  FormatFunction
  * 
- * @param {Object} data The original data.
+ * @param {object} data The original data.
  * @param {Boolean=} isFromResponse Whether the data is from response.
- * @return {Object} The data after format.
+ * @return {object|any} The data after format.
  */
 
 /**
- * @module req-log
- * @param {Object} options
- * @param {Object=} options.kafkaSchedule The instance of class KafkaProducer from the package of [queue-schedule](https://npmjs.com/package/queue-schedule). 
- * @param {Object=} options.mongooseModel The instance of a mongoose Model to save the request log.
- * @param {Object=} options.alarm The alarm object, it should has the function of sendAll.
+ * @module @yunnysunny/request-logging
+ * @param {object} options
+ * @param {object=} options.kafkaSchedule The instance of class KafkaProducer from the package of [queue-schedule](https://npmjs.com/package/queue-schedule). 
+ * @param {object=} options.mongooseModel The instance of a mongoose Model to save the request log.
+ * @param {object=} options.alarm The alarm object, it should has the function of sendAll.
  * @param {String[]} [options.customHeaderKeys=[]] The data indicates the specific headers to store into mongo and kafka.
  * @param {FormatFunction=} options.dataFormat The custom data format function, it use to resolve the conflict occured in elasticsearch.
  */
-module.exports = function({
+function middleware({
     kafkaSchedule=null,
     mongooseModel=null,
     alarm=null,
@@ -145,4 +145,6 @@ module.exports = function({
         });
         next();
     };
-}; 
+}
+
+module.exports = middleware; 
