@@ -1634,10 +1634,10 @@ kafka-node@^5.0.0:
   optionalDependencies:
     snappy "^6.0.1"
 
-kafkajs@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.npmmirror.com/kafkajs/-/kafkajs-2.0.0.tgz#04f468bacc4ccb850529e2293886db6b7c41c08a"
-  integrity sha512-NdDhoEJcCBx7XTqXDbolkk5UJ4Rt4XefZ1SdP2NmFF5J39+WRh1gLdqhcQfnP8bn6sw08llfjyrg2bOhONBzZQ==
+kafkajs@^1.16.0:
+  version "1.16.0"
+  resolved "https://registry.npmmirror.com/kafkajs/-/kafkajs-1.16.0.tgz#bfcc3ae2b69265ca8435b53a01ee9e8787b9fee5"
+  integrity sha512-+Rcfu2hyQ/jv5skqRY8xA7Ra+mmRkDAzCaLDYbkGtgsNKpzxPWiLbk8ub0dgr4EbWrN1Zb4BCXHUkD6+zYfdWg==
 
 kareem@2.3.2:
   version "2.3.2"
