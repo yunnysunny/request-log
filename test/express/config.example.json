@@ -1,6 +1,6 @@
 {
     "port":7001,
-    "errorLogFile":"~/demo-error.log",
+    "errorLogFile":"demo-error.log",
     "kafkaConfig":{
         "topic":"req-log",
         "peers":"127.0.0.1:9092"
