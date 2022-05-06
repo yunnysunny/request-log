@@ -1,5 +1,6 @@
 const slogger = require('node-slogger');
-const {KafkaProducer} = require('queue-schedule');
+const { Kafka } = require('kafkajs');
+const { KafkaJsProducer } = require('queue-schedule');
 const mongoose = require('mongoose');
 const configObj = require('../config.json');
 const settings = require('config-settings').init(configObj);
@@ -21,12 +22,13 @@ exports.slogger = slogger;
 
 const kafkaHost = settings.loadNecessaryVar('kafkaConfig.peers');
 const topic = settings.loadNecessaryVar('kafkaConfig.topic');
-
-exports.kafkaSchedule = new KafkaProducer({
-    name : topic,
+const client =  new Kafka({
+    brokers: [kafkaHost]
+});
+exports.kafkaSchedule = new KafkaJsProducer({
     topic: topic,
     delayInterval:1000,
-    kafkaHost:kafkaHost
+    client
 });
 let mongoConfig = settings.loadNecessaryObject('mongoConfig');
 mongoose.Promise = global.Promise;
