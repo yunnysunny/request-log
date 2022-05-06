@@ -31,6 +31,8 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
       - name: Start services
         run: ./run_docker.sh
+      - name: Create Config
+        run: cp test/express/config.example.json test/express/config.json
       - name: Install Dependencies
         run: yarn install
       - name: Test On Node ${{ matrix.node-version }}
