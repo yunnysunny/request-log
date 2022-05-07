@@ -4,11 +4,12 @@ export = middleware;
  * @callback  FormatFunction
  *
  * @param {object} data The original data.
- * @param {Boolean=} isFromResponse Whether the data is from response.
+ * @param {Boolean} isFromResponse Whether the data is from response.
+ * @param {import('express').Request} req The express request object
  * @return {object|any} The data after format.
  */
 /**
- * @module req-log
+ * @module @yunnysunny/request-logging
  * @param {object} options
  * @param {object=} options.kafkaSchedule The instance of class KafkaProducer from the package of [queue-schedule](https://npmjs.com/package/queue-schedule).
  * @param {object=} options.mongooseModel The instance of a mongoose Model to save the request log.
@@ -29,5 +30,5 @@ declare namespace middleware {
 /**
  * The default format function
  */
-type FormatFunction = (data: object, isFromResponse?: boolean | undefined) => object | any;
+type FormatFunction = (data: object, isFromResponse: boolean, req: import('express').Request) => object | any;
 //# sourceMappingURL=index.d.ts.map

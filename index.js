@@ -11,7 +11,8 @@ function _dataFormat(data) {
  * @callback  FormatFunction
  * 
  * @param {object} data The original data.
- * @param {Boolean=} isFromResponse Whether the data is from response.
+ * @param {Boolean} isFromResponse Whether the data is from response.
+ * @param {import('express').Request} req The express request object
  * @return {object|any} The data after format.
  */
 
@@ -55,17 +56,17 @@ function middleware({
             const user_agent = req.get('User-Agent') || '';
             const hostname = req.hostname;
             const path = req.path;
-            const content_length = res.get('content-length') || -1;
+            const content_length = Number(res.get('content-length')) || -1;
             const status_code = res.statusCode;
             const res_code = Number(res.get('res-code')) || 0;
             const content_length_req = Number(req.get('content-length')) || 0;
             const req_data_original = method === 'POST' ?
                 req.body :
                 req.query;
-            const req_data = dataFormat(req_data_original);
+            const req_data = dataFormat(req_data_original, false, req);
             const referer = req.get('referer') || '';
             const session = req.session;
-            const res_data = dataFormat(res._res_data, true);
+            const res_data = dataFormat(res._res_data, true, req);
             
             if (kafkaSchedule || mongooseModel) {
                 const custom_headers = {};
