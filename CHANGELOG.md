@@ -1,3 +1,7 @@
+# v0.15.0
+## Add
+1. Add `stdoutDisabled` parameter to middleware.
+
 # v0.14.0
 ## Add
 1. Add express.Request parameter to FormatFunction.

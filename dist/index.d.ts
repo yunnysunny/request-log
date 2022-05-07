@@ -16,13 +16,15 @@ export = middleware;
  * @param {object=} options.alarm The alarm object, it should has the function of sendAll.
  * @param {String[]} [options.customHeaderKeys=[]] The data indicates the specific headers to store into mongo and kafka.
  * @param {FormatFunction=} options.dataFormat The custom data format function, it use to resolve the conflict occured in elasticsearch.
+ * @param {Boolean=} [options.stdoutDisabled=false] Whether to print access log to console.
  */
-declare function middleware({ kafkaSchedule, mongooseModel, alarm, customHeaderKeys, dataFormat }?: {
+declare function middleware({ kafkaSchedule, mongooseModel, alarm, customHeaderKeys, dataFormat, stdoutDisabled, }?: {
     kafkaSchedule?: object | undefined;
     mongooseModel?: object | undefined;
     alarm?: object | undefined;
     customHeaderKeys?: string[];
     dataFormat?: FormatFunction | undefined;
+    stdoutDisabled?: boolean | undefined;
 }): (req: any, res: any, next: any) => void;
 declare namespace middleware {
     export { FormatFunction };

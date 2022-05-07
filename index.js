@@ -24,13 +24,15 @@ function _dataFormat(data) {
  * @param {object=} options.alarm The alarm object, it should has the function of sendAll.
  * @param {String[]} [options.customHeaderKeys=[]] The data indicates the specific headers to store into mongo and kafka.
  * @param {FormatFunction=} options.dataFormat The custom data format function, it use to resolve the conflict occured in elasticsearch.
+ * @param {Boolean=} [options.stdoutDisabled=false] Whether to print access log to console.
  */
 function middleware({
     kafkaSchedule=null,
     mongooseModel=null,
     alarm=null,
     customHeaderKeys=[],
-    dataFormat=_dataFormat
+    dataFormat=_dataFormat,
+    stdoutDisabled=false,
 }={}) {
     return function(req, res, next) {
         //begin
@@ -123,8 +125,9 @@ function middleware({
                 }
             }
     
-            
-            slogger.info(`${ip} ${duration} ms ${content_length_req} "${method} ${original_url} HTTP/${req.httpVersion}" ${status_code} ${content_length} "${referer}" "${user_agent}"`);
+            if (!stdoutDisabled) {
+                slogger.info(`${ip} ${duration} ms ${content_length_req} "${method} ${original_url} HTTP/${req.httpVersion}" ${status_code} ${content_length} "${referer}" "${user_agent}"`);
+            }
         }
 
         // res.end = function() {

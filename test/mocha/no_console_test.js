@@ -1,7 +1,7 @@
-const app = require('../express/src/app-no-param');
+const app = require('../express/src/app-no-console');
 
 const request = require('supertest');
-describe('no param test:',function() {
+describe('no console test:',function() {
     it('sucess when request / ok',function(done) {
         request(app)
             .get('/')
