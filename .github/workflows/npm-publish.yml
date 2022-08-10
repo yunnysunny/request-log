@@ -34,7 +34,7 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-      - run: npm run doc
+      - run: yarn install && npm run doc
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
