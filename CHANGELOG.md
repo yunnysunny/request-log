@@ -1,3 +1,7 @@
+# v0.15.1
+## Fix
+1. Fix document url.
+
 # v0.15.0
 ## Add
 1. Add `stdoutDisabled` parameter to middleware.

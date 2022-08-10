@@ -1,6 +1,6 @@
 {
   "name": "@yunnysunny/request-logging",
-  "version": "0.15.0",
+  "version": "0.15.1",
   "description": "Print the express request log to console and save it to kafka when required, and even can send alram message when the response code greater than 500.",
   "main": "index.js",
   "types": "dist/index.d.ts",
@@ -10,9 +10,9 @@
   "scripts": {
     "test": "nyc mocha --recursive test/mocha --timeout 999999 --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "doc": "typedoc index.js --out doc",
+    "doc": "typedoc index.js --out docs",
     "release": "git push && release-to-github-with-changelog",
-    "types": "npx -p typescript tsc"
+    "types": "tsc"
   },
   "repository": {
     "type": "git",

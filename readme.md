@@ -48,7 +48,7 @@ app.use(bodyParser.urlencoded({
 
 ## API
 
-See [api](https://github.com/yunnysunny/request-log/blob/HEAD/doc/api.md) document.
+See [api](https://blog.whyun.com/request-log) document.
 
 ## Fields
 
