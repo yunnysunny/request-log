@@ -22,6 +22,11 @@ describe('mongodb test:',function() {
                 done();
             });
     });
+    it('sleep 500ms', function(done) {
+        setTimeout(() => {
+            done();
+        }, 500);
+    });
     it('the lastest url is ' + reqUrl,function(done) {
         requestLogModel.findOne({},{original_url:1, custom_headers: 1},{
             sort:{_id:-1},lean:true
@@ -47,6 +52,11 @@ describe('mongodb test:',function() {
                 }
                 done();
             });
+    });
+    it('sleep 500ms', function(done) {
+        setTimeout(() => {
+            done();
+        }, 500);
     });
     it('the lastest url is /do-get-res-code and res_code is 1000',function(done) {
         requestLogModel.findOne({},{original_url:1,res_code:1},{
@@ -92,7 +102,11 @@ describe('mongodb test:',function() {
             }
         }, 1000);
     });
-
+    it('sleep 500ms', function(done) {
+        setTimeout(() => {
+            done();
+        }, 500);
+    });
     it('get abort requst', function(done) {
         requestLogModel.findOne({},{req_data:1, aborted: 1},{
             sort:{_id:-1},lean:true
@@ -121,6 +135,11 @@ describe('mongodb test:',function() {
                 done();
             });
 
+    });
+    it('sleep 500ms', function(done) {
+        setTimeout(() => {
+            done();
+        }, 500);
     });
     it('get res_data success',function(done) {
         requestLogModel.findOne({},{original_url:1,res_code:1, res_data:1},{

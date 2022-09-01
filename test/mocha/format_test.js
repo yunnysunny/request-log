@@ -30,6 +30,11 @@ describe('format test:',function() {
                 done();
             });
     });
+    it('sleep 500ms', function(done) {
+        setTimeout(() => {
+            done();
+        }, 500);
+    });
     it('the ' + TO_FORMAT_FIELD + ' will be format to ' + MY_PARAM + FORMAT_SUFFIX,function(done) {
         requestLogModel.findOne({},{custom_headers: 1,req_data:1},{
             sort:{_id:-1},lean:true
