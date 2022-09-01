@@ -130,10 +130,11 @@ function middleware({
             }
         }
 
-        // res.end = function() {
-        //     origianlEnd.apply(res,arguments);
-        //     doLog();
-        // };
+        res.on('close', function() {
+            aborted = !res.writableFinished;
+            doLog();
+            hasLoged = true;
+        });
         res.on('finish', function() {
             doLog();
             hasLoged = true;

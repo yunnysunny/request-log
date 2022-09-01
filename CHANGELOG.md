@@ -1,3 +1,7 @@
+# v0.15.2
+## Fix
+1. Fix log not recorded on node 16+ when client close the http underlay socket. see issue [40775](https://github.com/nodejs/node/issues/40775) on node also.
+
 # v0.15.1
 ## Fix
 1. Fix document url.
