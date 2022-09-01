@@ -23,7 +23,6 @@ jobs:
       - run: cp test/express/config.example.json test/express/config.json
       - run: ./run_docker.sh
       - run: yarn install
-      - run: mkdir -p path
       - run: npm test
 
   publish-npm:

@@ -43,7 +43,6 @@ jobs:
       - name: Test On Node ${{ matrix.node-version }}
 
         run: |
-          mkdir -p path
           npm run test
       - name: Coverage on Node ${{ matrix.node-version }}
         run: npm run coverage
