@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/yunnysunny/request-log#readme",
   "dependencies": {
-    "ip": "^1.1.5",
+    "ip": "^1.1.9",
     "node-slogger": "^2.0.0"
   },
   "devDependencies": {
