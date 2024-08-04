@@ -6,7 +6,7 @@ describe('no session test:',function() {
         request(app)
             .get('/')
             .expect(200)
-            .end(function(err) {
+            .end(function(err: any) {
                 if (err) {
                     return done(err);
                 }

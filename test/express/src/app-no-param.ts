@@ -8,8 +8,8 @@ const {
     slogger,
     port,
 } = require('./config');
-const requestLog = require('../../../index');
-
+import requestLog  from '../../../lib';
+import { Request, Response, NextFunction } from "express";
 const app = express();
 app.enable('trust proxy');
 
@@ -29,15 +29,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    const err = new Error('Not Found:' + req.path);
+app.use(function(req: Request, res: Response, next: NextFunction) {
+    const err: any = new Error('Not Found:' + req.path);
     err.status = 404;
     next(err);
 });
 
 // error handlers
-app.use(function(err, req, res, next) {
-    const status = err.status;
+app.use(function(err: any, req: Request, res: Response, next: NextFunction) {
+    const status: number = err.status;
     if (status === 404) {
         return res.status(404).send(err.message || '未知异常');
     }

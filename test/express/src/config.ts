@@ -1,7 +1,11 @@
-const slogger = require('node-slogger');
+// const slogger = require('node-slogger');
+import { Slogger } from 'node-slogger';
+import * as fs from 'fs';
 const { Kafka } = require('kafkajs');
 const { KafkaJsProducer } = require('queue-schedule');
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import { requestLogSchema } from './schemas/request_log_schema';
+import exp from 'constants';
 const configObj = require('../config.json');
 const settings = require('config-settings').init(configObj);
 
@@ -13,10 +17,15 @@ exports.FORMAT_SUFFIX = '_format';
 
 const errorFile = settings.loadNecessaryFile('errorLogFile', true);
 
-slogger.init({
-    logFiles:[
-        {category:'error',filename:errorFile}
-    ]
+// slogger.init({
+//     logFiles:[
+//         {category:'error',filename:errorFile}
+//     ]
+// });
+const slogger = new Slogger({
+    streams: {
+        error: fs.createWriteStream(errorFile)
+    }
 });
 exports.slogger = slogger;
 
@@ -31,6 +40,15 @@ exports.kafkaSchedule = new KafkaJsProducer({
     client
 });
 let mongoConfig = settings.loadNecessaryObject('mongoConfig');
-mongoose.Promise = global.Promise;
-mongoose.connect(mongoConfig.url, mongoConfig.option); // connect to database
-exports.requestLogModel = mongoose.model('RequestLog',require('./schemas/request_log_schema'));
+
+mongoose.connect(mongoConfig.url, mongoConfig.option).then(() => {
+    slogger.info('connect to mongodb success');
+}).catch((err) => {
+    slogger.error('connect to mongodb failed', err);
+}); // connect to database
+exports.requestLogModel = mongoose.model('RequestLog', requestLogSchema);
+export const requestLogModel = exports.requestLogModel;
+process.on('unhandledRejection', err => {
+    // eslint-disable-next-line no-console
+    slogger.error('unhandledRejection:', err)
+})

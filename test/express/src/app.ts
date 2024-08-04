@@ -1,23 +1,25 @@
+import { Request, Response, NextFunction } from "express";
+
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
 const routes = require('./routes/index');
 
 const {
     slogger,
     port,
-    requestLogModel,
-    CUSTOM_HEADER_KEY_MY_ID
+    kafkaSchedule
 } = require('./config');
-const requestLog = require('../../../index');
-require('./plugins/reponse');
+import requestLog  from '../../../lib';
+
 const app = express();
 app.enable('trust proxy');
 
 // view engine setup
 app.set('port', port);
-app.use(requestLog({mongooseModel:requestLogModel,customHeaderKeys: [CUSTOM_HEADER_KEY_MY_ID]}));
+app.use(requestLog({kafkaSchedule}));
 
 app.use(bodyParser.json({limit: '1mb'}));
 app.use(bodyParser.urlencoded({
@@ -27,19 +29,26 @@ app.use(bodyParser.urlencoded({
 
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser());
+app.use(session({
+    secret: 'GG##@$',
+    key:'express_test',
+    resave:false,
+    saveUninitialized:false
+}));
 
 app.use('/', routes);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    const err = new Error('Not Found:' + req.path);
+app.use(function(req: Request, res: Response, next: NextFunction) {
+    const err: any = new Error('Not Found:' + req.path);
     err.status = 404;
     next(err);
 });
 
 // error handlers
-app.use(function(err, req, res, next) {
-    const status = err.status;
+app.use(function(err: any, req: Request, res: Response, next: NextFunction) {
+    const status: number = err.status;
     if (status === 404) {
         return res.status(404).send(err.message || '未知异常');
     }

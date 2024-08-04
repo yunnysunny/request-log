@@ -20,14 +20,47 @@ let req_id_count = 0;
 function _dataFormat(data: any): any {
     return data;
 }
-
-interface MiddlewareOptions {
+export interface SimpleLogger {
+    error: (...args: unknown[]) => void;
+    warn: (...args: unknown[]) => void;
+    info: (...args: unknown[]) => void;
+    debug: (...args: unknown[]) => void;
+    trace: (...args: unknown[]) => void;
+}
+export interface MiddlewareOptions {
     kafkaSchedule?: KafkaProducer | null;
     mongooseModel?: Model<any> | null;
     alarm?: { sendAll: (message: string, callback: (err: Error | null) => void) => void } | null;
     customHeaderKeys?: string[];
     dataFormat?: (data: any, isFromResponse: boolean, req: Request) => any;
     stdoutDisabled?: boolean;
+    logger?: SimpleLogger;
+}
+
+export interface RequestData {
+    hostname: string;
+    original_url: string;
+    path: string;
+    user_agent: string;
+    custom_headers: Record<string, string | undefined>;
+    method: string;
+    ip?: string;
+    host: string;
+    duration: number;
+    pid: number;
+    req_id: number;
+    content_length_req: number;
+    content_length: number;
+    status_code: number;
+    res_code: number;
+    res_data: string;
+    req_time: number;
+    req_time_string: string;
+    req_data: string;
+    referer: string;
+    session: string;
+    aborted: boolean;
+    created_at: number;
 }
 
 function middleware({
@@ -37,6 +70,7 @@ function middleware({
     customHeaderKeys = [],
     dataFormat = _dataFormat,
     stdoutDisabled = false,
+    logger = console
 }: MiddlewareOptions = {}) {
     return function (req: Request, res: Response, next: NextFunction) {
         const date = new Date();
@@ -73,10 +107,10 @@ function middleware({
                 if (customHeaderKeys && customHeaderKeys.length > 0) {
                     for (let i = 0, len = customHeaderKeys.length; i < len; i++) {
                         const key = customHeaderKeys[i];
-                        custom_headers[key] = req.get(key);
+                        custom_headers[key] = req.get(key) as string;
                     }
                 }
-                const data = {
+                const data: RequestData = {
                     hostname,
                     original_url,
                     path,
@@ -106,10 +140,9 @@ function middleware({
                     kafkaSchedule.addData(data);
                 }
                 if (mongooseModel) {
-                    new mongooseModel(data).save((err: Error) => {
-                        if (err) {
-                            //slogger.error('save request log to mongodb failed', err);
-                        }
+                    const obj = new mongooseModel(data);
+                    obj.save({maxTimeMS: 500}).catch((err: Error) => {
+                        logger.error('save to mongo failed', err);
                     });
                 }
             }
@@ -118,14 +151,14 @@ function middleware({
                 if (status_code >= 500 && status_code < 600) {
                     alarm.sendAll(`${status_code}:${serverIp}:${original_url}`, (err: Error | null) => {
                         if (err) {
-                            //slogger.error('发送警告数据时报错', err);
+                            logger.error('发送警告数据时报错', err);
                         }
                     });
                 }
             }
 
             if (!stdoutDisabled) {
-                //slogger.info(`${ip} ${duration} ms ${content_length_req} "${method} ${original_url} HTTP/${req.httpVersion}" ${status_code} ${content_length} "${referer}" "${user_agent}"`);
+                logger.info(`${ip} ${duration} ms ${content_length_req} "${method} ${original_url} HTTP/${req.httpVersion}" ${status_code} ${content_length} "${referer}" "${user_agent}"`);
             }
         }
 

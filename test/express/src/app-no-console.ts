@@ -4,13 +4,13 @@ const bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 const routes = require('./routes/index');
-
+import { Request, Response, NextFunction } from "express";
 const {
     slogger,
     port,
     kafkaSchedule
 } = require('./config');
-const requestLog = require('../../../index');
+import requestLog  from '../../../lib';
 
 const app = express();
 app.enable('trust proxy');
@@ -38,14 +38,14 @@ app.use(session({
 app.use('/', routes);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    const err = new Error('Not Found:' + req.path);
-    err.status = 404;
+app.use(function(req: Request, res: Response, next: NextFunction) {
+    const err: Error = new Error('Not Found:' + req.path);
+    (err as any).status = 404;
     next(err);
 });
 
 // error handlers
-app.use(function(err, req, res, next) {
+app.use(function(err: any, req: Request, res: Response, next: NextFunction) {
     const status = err.status;
     if (status === 404) {
         return res.status(404).send(err.message || '未知异常');

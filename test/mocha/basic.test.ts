@@ -1,6 +1,6 @@
-const request = require('supertest');
-const {expect} = require('chai');
-const path = require('path');
+import request from 'supertest';
+import { expect } from 'chai';
+import path from 'path';
 const app = require('../express/src/app');
 
 let cookie = '';

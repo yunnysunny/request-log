@@ -12,5 +12,5 @@
     "declaration": true,
     "outDir": "dist/cjs",
   },
-  "include": ["lib/**/*.ts", "test/**/*.ts"],
+  "include": ["lib/**/*.ts", "test/**/*.ts", "test/node/abort.js"],
 }

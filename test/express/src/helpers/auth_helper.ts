@@ -4,7 +4,7 @@ const crypto = require('crypto');
  * @param app
  * @param app.secret
  */
-const doSign = exports.doSign = function(data, secret) {
+const doSign = exports.doSign = function(data: any, secret: string) {
     const keys = Object.keys(data);
     keys.sort();
     const hash = crypto.createHmac('sha256',secret);
@@ -28,6 +28,6 @@ const doSign = exports.doSign = function(data, secret) {
  * @param app.secret
  * @param signInput
  */
-exports.verifySign = function(data, secret) {
+exports.verifySign = function(data: any, secret: string) {
     return doSign(data, secret) === data.sign;
 };

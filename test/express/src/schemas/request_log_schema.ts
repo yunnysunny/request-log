@@ -1,6 +1,6 @@
-const {Schema} = require('mongoose');
+import {Schema} from 'mongoose';
 
-const requestLogSchema =  new Schema({
+export const requestLogSchema =  new Schema({
     req_time: Date
 },{ 
     autoIndex: false,
@@ -10,7 +10,3 @@ const requestLogSchema =  new Schema({
     },
     strict: false
 });
-
-
-
-module.exports = requestLogSchema;
