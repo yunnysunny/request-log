@@ -3,9 +3,8 @@ import { Slogger } from 'node-slogger';
 import * as fs from 'fs';
 const { Kafka } = require('kafkajs');
 const { KafkaJsProducer } = require('queue-schedule');
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 import { requestLogSchema } from './schemas/request_log_schema';
-import exp from 'constants';
 const configObj = require('../config.json');
 const settings = require('config-settings').init(configObj);
 
@@ -40,12 +39,9 @@ exports.kafkaSchedule = new KafkaJsProducer({
     client
 });
 let mongoConfig = settings.loadNecessaryObject('mongoConfig');
+mongoose.Promise = global.Promise;
 
-mongoose.connect(mongoConfig.url, mongoConfig.option).then(() => {
-    slogger.info('connect to mongodb success');
-}).catch((err) => {
-    slogger.error('connect to mongodb failed', err);
-}); // connect to database
+mongoose.connect(mongoConfig.url, mongoConfig.option); // connect to database
 exports.requestLogModel = mongoose.model('RequestLog', requestLogSchema);
 export const requestLogModel = exports.requestLogModel;
 process.on('unhandledRejection', err => {
