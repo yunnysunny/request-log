@@ -1,3 +1,10 @@
+# v0.16.0
+## Breaking changes
+1. Remove `kafkaSchedule` `mongooseModel` `alarm` option, please use `onReqFinished` instead.
+2. The default `dataFormat` function will use JSON.stringify to return string, since it's safe for elasticsearch. If you want to return with you own format, please pass the `dataFormat` parameter yourself. 
+## Add
+1. Add support for esm module.
+2. Add `router` field.
 # v0.15.2
 ## Fix
 1. Fix log not recorded on node 16+ when client close the http underlay socket. see issue [40775](https://github.com/nodejs/node/issues/40775) on node also.
