@@ -18,7 +18,19 @@ app.enable('trust proxy');
 
 // view engine setup
 app.set('port', port);
-app.use(requestLog({mongooseModel:requestLogModel,customHeaderKeys: [CUSTOM_HEADER_KEY_MY_ID]}));
+app.use(requestLog({
+    onReqFinished:(data) => {
+        const obj = new requestLogModel(data);
+        obj.save({maxTimeMS: 500}).catch((err: Error) => {
+            slogger.error('save to mongo failed', err);
+        });
+    },
+    dataFormat: (data, isRes, req) => {
+        return data;
+    },
+    customHeaderKeys: [CUSTOM_HEADER_KEY_MY_ID],
+    customEnvNames: ['NODE_ENV'],
+}));
 
 app.use(bodyParser.json({limit: '1mb'}));
 app.use(bodyParser.urlencoded({

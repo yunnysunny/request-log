@@ -8,8 +8,8 @@ const {
     CUSTOM_HEADER_KEY_MY_ID
 } = require('../express/src/config');
 const MY_ID = Math.random() + '';
-
-describe('mongodb test:', function() {
+process.env.NODE_ENV = 'test';
+describe.only('mongodb test:', function() {
     it('success when request ' + reqUrl + ' ok', async function() {
         await request(app)
             .get(reqUrl)
@@ -24,7 +24,9 @@ describe('mongodb test:', function() {
     });
 
     it('the latest url is ' + reqUrl, async function() {
-        const item = await requestLogModel.findOne({}, { original_url: 1, custom_headers: 1 }, {
+        const item = await requestLogModel.findOne({}, {
+            original_url: 1, custom_headers: 1, custom_envs: 1
+        }, {
             sort: { _id: -1 }, lean: true
         }).exec();
 
@@ -34,6 +36,7 @@ describe('mongodb test:', function() {
 
         expect(item.original_url).equal(reqUrl);
         expect(item.custom_headers).to.have.property(CUSTOM_HEADER_KEY_MY_ID).and.equal(MY_ID);
+        expect(item.custom_envs).to.have.property('NODE_ENV').and.equal('test');
     });
 
     it('success request when request /do-get-res-code', async function() {

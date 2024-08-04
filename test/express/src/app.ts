@@ -10,7 +10,6 @@ const routes = require('./routes/index');
 const {
     slogger,
     port,
-    kafkaSchedule
 } = require('./config');
 import requestLog  from '../../../lib';
 
@@ -19,7 +18,7 @@ app.enable('trust proxy');
 
 // view engine setup
 app.set('port', port);
-app.use(requestLog({kafkaSchedule}));
+app.use(requestLog({}));
 
 app.use(bodyParser.json({limit: '1mb'}));
 app.use(bodyParser.urlencoded({

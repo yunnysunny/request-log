@@ -19,14 +19,15 @@ app.enable('trust proxy');
 
 // view engine setup
 app.set('port', port);
-interface RequestLogConfig {
-    mongooseModel: any;
-    customHeaderKeys: string[];
-    dataFormat: (data: any, isFromRes: boolean) => any | void;
-}
+
 
 app.use(requestLog({
-    mongooseModel: requestLogModel,
+    onReqFinished: (data) => {
+        const obj = new requestLogModel(data);
+        obj.save({maxTimeMS: 500}).catch((err: Error) => {
+            slogger.error('save to mongo failed', err);
+        });
+    },
     customHeaderKeys: [CUSTOM_HEADER_KEY_MY_ID],
     dataFormat: function(data: any, isFromRes: boolean): any | void {
         if (isFromRes) {
@@ -35,7 +36,7 @@ app.use(requestLog({
         data[TO_FORMAT_FIELD] = (data[TO_FORMAT_FIELD] || '') + FORMAT_SUFFIX;
         return data;
     }
-} as RequestLogConfig));
+}));
 
 app.use(bodyParser.json({limit: '1mb'}));
 app.use(bodyParser.urlencoded({

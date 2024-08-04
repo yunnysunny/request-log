@@ -8,16 +8,18 @@ import { Request, Response, NextFunction } from "express";
 const {
     slogger,
     port,
-    kafkaSchedule
 } = require('./config');
 import requestLog  from '../../../lib';
+import { kafkaSchedule } from "./config";
 
 const app = express();
 app.enable('trust proxy');
 
 // view engine setup
 app.set('port', port);
-app.use(requestLog({kafkaSchedule, stdoutDisabled: true}));
+app.use(requestLog({onReqFinished: (data) => {
+    kafkaSchedule.addData(data);
+}, stdoutDisabled: true}));
 
 app.use(bodyParser.json({limit: '1mb'}));
 app.use(bodyParser.urlencoded({
