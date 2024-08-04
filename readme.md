@@ -59,8 +59,10 @@ If you want to save request logging to mongodb, this is the fields description, 
 | hostname       | String | The domain of current server.                                |
 | original_url   | String | The original url contains query string.                      |
 | path           | String | The request path doesn't contain query string.               |
+| router         | String | The request router for express.                              |
 | user_agent     | String | The user agent.                                              |
-| custom_headers | Object | The specific you wanna save.                                 | 
+| custom_headers | Object | The specific headers you wanna save.                         | 
+| custom_envs    | Object | The specific env variables you wanna save.                   | 
 | method         | String | The http request method.                                     |
 | ip             | String | The client's ip.                                             |
 | host           | String | The server's ip.                                             |
