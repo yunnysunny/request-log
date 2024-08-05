@@ -1,0 +1,6 @@
+{
+  "plugin": ["typedoc-plugin-rename-defaults"],
+  "entryPoints": ["./lib/index.ts"],
+  "out": "./docs"
+}
+  

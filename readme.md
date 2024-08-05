@@ -48,7 +48,7 @@ app.use(bodyParser.urlencoded({
 
 ## API
 
-See [api](https://request-logging.whyun.com) document.
+See [api](https://request-log.whyun.com/functions/middleware.html) document.
 
 ## Fields
 
@@ -98,6 +98,9 @@ const requestLogSchema =  new Schema({
 module.exports = requestLogSchema;
 ```
 
+## Breaking changes on 0.16.x
+1. Remove `kafkaSchedule` `mongooseModel` `alarm` option, please use `onReqFinished` instead.
+2. The default `dataFormat` function will use JSON.stringify to return string, since it's safe for elasticsearch. If you want to return with you own format, please pass the `dataFormat` parameter yourself. 
 
 ## License
 

@@ -2,9 +2,6 @@ import type { Request, Response, NextFunction } from 'express';
 
 import { address as getIpAddress } from 'ip';
 
-interface KafkaProducer {
-    addData(data: unknown): void;
-}
 // declare module 'express' {
 //     interface Request {
 //         session: unknown;
@@ -28,21 +25,51 @@ export interface SimpleLogger {
     debug: (...args: unknown[]) => void;
     trace: (...args: unknown[]) => void;
 }
+/**
+ * Represents a callback function that is called when a request is finished.
+ * @param data - The request data.
+ */
 export interface OnReqFinished {
     (data: RequestData): void;
 }
+/**
+ * Represents the options for the middleware.
+ */
 export interface MiddlewareOptions {
-    // kafkaSchedule?: KafkaProducer | null;
-    // mongooseModel?: Model<any> | null;
-    // alarm?: { sendAll: (message: string, callback: (err: Error | null) => void) => void } | null;
+    /**
+     * Callback function that will be called when the request is finished.
+     */
     onReqFinished?: OnReqFinished;
+
+    /**
+     * An array of custom header keys.
+     */
     customHeaderKeys?: string[];
+
+    /**
+     * An array of custom environment variable names.
+     */
     customEnvNames?: string[];
+
+    /**
+     * A function that formats the data before logging.
+     */
     dataFormat?: (data: any, isFromResponse: boolean, req: Request) => any;
+
+    /**
+     * Specifies whether the standard output is disabled.
+     */
     stdoutDisabled?: boolean;
+
+    /**
+     * An instance of a logger.
+     */
     logger?: SimpleLogger;
 }
 
+/**
+ * Represents the data associated with a request.
+ */
 export interface RequestData {
     hostname: string;
     original_url: string;
@@ -71,7 +98,15 @@ export interface RequestData {
     created_at: number;
 }
 
-function middleware({
+/**
+ * Middleware function for logging request information.
+ * 
+ * @module @yunnysunny/request-logging
+ *
+ * @param options - The options for the middleware.
+ * @returns The middleware function.
+ */
+export default function middleware({
     onReqFinished,
     customHeaderKeys = [],
     customEnvNames = [],
@@ -200,5 +235,3 @@ function middleware({
         next();
     };
 }
-
-export default middleware;
