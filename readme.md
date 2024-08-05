@@ -30,7 +30,7 @@ Print the express request log to console and save it to kafka and mongodb when r
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const requestLog = require('@yunnysunny/request-logging');
+const requestLog = require('@yunnysunny/request-logging').default;
 
 const app = express();
 app.enable('trust proxy');

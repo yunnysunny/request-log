@@ -2,6 +2,7 @@
 ## Breaking changes
 1. Remove `kafkaSchedule` `mongooseModel` `alarm` option, please use `onReqFinished` instead.
 2. The default `dataFormat` function will use JSON.stringify to return string, since it's safe for elasticsearch. If you want to return with you own format, please pass the `dataFormat` parameter yourself. 
+3. You should use `const requestLog = require('@yunnysunny/request-logging').default;` to access the default middleware function in cjs module.
 ## Add
 1. Add support for esm module.
 2. Add `router` field.
