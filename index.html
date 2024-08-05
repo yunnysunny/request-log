@@ -1,34 +1,15 @@
-<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>@yunnysunny/request-logging</title><meta name="description" content="Documentation for @yunnysunny/request-logging"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">@yunnysunny/request-logging</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>@yunnysunny/request-logging </h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
-<a href="#request-logging" id="request-logging" style="color: inherit; text-decoration: none;">
-  <h1>request-logging</h1>
-</a>
-<p>Print the express request log to console and save it to kafka and mongodb when required, and even can send alram message when the response code greater than 500.</p>
+<!DOCTYPE html><html class="default" lang="en"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>@yunnysunny/request-logging</title><meta name="description" content="Documentation for @yunnysunny/request-logging"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="assets/icons.svg#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div><div class="field"><div id="tsd-toolbar-links"></div></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">@yunnysunny/request-logging</a></div><div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h2>@yunnysunny/request-logging</h2></div><div class="tsd-panel tsd-typography"><a id="md:request-logging" class="tsd-anchor"></a><h1 class="tsd-anchor-link">request-logging<a href="#md:request-logging" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1><p>Print the express request log to console and save it to kafka and mongodb when required, and even can send alram message when the response code greater than 500.</p>
 <p><a href="https://npmjs.org/package/@yunnysunny/request-logging"><img src="https://img.shields.io/npm/v/@yunnysunny/request-logging.svg?style=flat" alt="npm version"></a>
 <a href="https://travis-ci.org/yunnysunny/request-log"><img src="https://img.shields.io/travis/yunnysunny/request-log.svg?style=flat-square" alt="build status"></a>
 <a href="https://david-dm.org/yunnysunny/@yunnysunny/request-logging"><img src="https://img.shields.io/david/yunnysunny/@yunnysunny/request-logging.svg?style=flat-square" alt="David deps"></a>
 <a href="https://coveralls.io/r/yunnysunny/request-log?branch=master"><img src="https://img.shields.io/coveralls/yunnysunny/request-log.svg?style=flat-square" alt="Test coverage"></a>
 <a href="http://nodejs.org/download/"><img src="https://img.shields.io/badge/node.js-%3E=_6-green.svg?style=flat-square" alt="node version"></a></p>
+<a id="md:installation" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Installation<a href="#md:installation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p><code>npm install @yunnysunny/request-logging --save</code></p>
+<a id="md:usage" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Usage<a href="#md:usage" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><pre><code class="javascript"><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">express</span><span class="hl-1"> = </span><span class="hl-3">require</span><span class="hl-1">(</span><span class="hl-4">&#39;express&#39;</span><span class="hl-1">);</span><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">path</span><span class="hl-1"> = </span><span class="hl-3">require</span><span class="hl-1">(</span><span class="hl-4">&#39;path&#39;</span><span class="hl-1">);</span><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">bodyParser</span><span class="hl-1"> = </span><span class="hl-3">require</span><span class="hl-1">(</span><span class="hl-4">&#39;body-parser&#39;</span><span class="hl-1">);</span><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">requestLog</span><span class="hl-1"> = </span><span class="hl-3">require</span><span class="hl-1">(</span><span class="hl-4">&#39;@yunnysunny/request-logging&#39;</span><span class="hl-1">);</span><br/><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">app</span><span class="hl-1"> = </span><span class="hl-3">express</span><span class="hl-1">();</span><br/><span class="hl-5">app</span><span class="hl-1">.</span><span class="hl-3">enable</span><span class="hl-1">(</span><span class="hl-4">&#39;trust proxy&#39;</span><span class="hl-1">);</span><br/><br/><span class="hl-6">// view engine setup</span><br/><span class="hl-5">app</span><span class="hl-1">.</span><span class="hl-3">set</span><span class="hl-1">(</span><span class="hl-4">&#39;port&#39;</span><span class="hl-1">, </span><span class="hl-5">port</span><span class="hl-1">);</span><br/><span class="hl-5">app</span><span class="hl-1">.</span><span class="hl-3">use</span><span class="hl-1">(</span><span class="hl-3">requestLog</span><span class="hl-1">());</span><br/><br/><span class="hl-5">app</span><span class="hl-1">.</span><span class="hl-3">use</span><span class="hl-1">(</span><span class="hl-5">bodyParser</span><span class="hl-1">.</span><span class="hl-3">json</span><span class="hl-1">({</span><span class="hl-5">limit:</span><span class="hl-1"> </span><span class="hl-4">&#39;1mb&#39;</span><span class="hl-1">}));</span><br/><span class="hl-5">app</span><span class="hl-1">.</span><span class="hl-3">use</span><span class="hl-1">(</span><span class="hl-5">bodyParser</span><span class="hl-1">.</span><span class="hl-3">urlencoded</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-5">extended:</span><span class="hl-1"> </span><span class="hl-0">false</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-5">limit:</span><span class="hl-1"> </span><span class="hl-4">&#39;1mb&#39;</span><br/><span class="hl-1">}));</span>
+</code><button type="button">Copy</button></pre>
 
-<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
-  <h2>Installation</h2>
-</a>
-<p><code>npm install @yunnysunny/request-logging --save</code></p>
-
-<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
-  <h2>Usage</h2>
-</a>
-<pre><code class="language-javascript"><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">express</span><span class="hl-1"> = </span><span class="hl-3">require</span><span class="hl-1">(</span><span class="hl-4">&#39;express&#39;</span><span class="hl-1">);</span><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">path</span><span class="hl-1"> = </span><span class="hl-3">require</span><span class="hl-1">(</span><span class="hl-4">&#39;path&#39;</span><span class="hl-1">);</span><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">bodyParser</span><span class="hl-1"> = </span><span class="hl-3">require</span><span class="hl-1">(</span><span class="hl-4">&#39;body-parser&#39;</span><span class="hl-1">);</span><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">requestLog</span><span class="hl-1"> = </span><span class="hl-3">require</span><span class="hl-1">(</span><span class="hl-4">&#39;@yunnysunny/request-logging&#39;</span><span class="hl-1">);</span><br/><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">app</span><span class="hl-1"> = </span><span class="hl-3">express</span><span class="hl-1">();</span><br/><span class="hl-5">app</span><span class="hl-1">.</span><span class="hl-3">enable</span><span class="hl-1">(</span><span class="hl-4">&#39;trust proxy&#39;</span><span class="hl-1">);</span><br/><br/><span class="hl-6">// view engine setup</span><br/><span class="hl-5">app</span><span class="hl-1">.</span><span class="hl-3">set</span><span class="hl-1">(</span><span class="hl-4">&#39;port&#39;</span><span class="hl-1">, </span><span class="hl-5">port</span><span class="hl-1">);</span><br/><span class="hl-5">app</span><span class="hl-1">.</span><span class="hl-3">use</span><span class="hl-1">(</span><span class="hl-3">requestLog</span><span class="hl-1">());</span><br/><br/><span class="hl-5">app</span><span class="hl-1">.</span><span class="hl-3">use</span><span class="hl-1">(</span><span class="hl-5">bodyParser</span><span class="hl-1">.</span><span class="hl-3">json</span><span class="hl-1">({</span><span class="hl-5">limit:</span><span class="hl-1"> </span><span class="hl-4">&#39;1mb&#39;</span><span class="hl-1">}));</span><br/><span class="hl-5">app</span><span class="hl-1">.</span><span class="hl-3">use</span><span class="hl-1">(</span><span class="hl-5">bodyParser</span><span class="hl-1">.</span><span class="hl-3">urlencoded</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-5">extended:</span><span class="hl-1"> </span><span class="hl-0">false</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-5">limit:</span><span class="hl-1"> </span><span class="hl-4">&#39;1mb&#39;</span><br/><span class="hl-1">}));</span>
-</code></pre>
-
-<a href="#api" id="api" style="color: inherit; text-decoration: none;">
-  <h2>API</h2>
-</a>
-<p>See <a href="https://blog.whyun.com/request-log">api</a> document.</p>
-
-<a href="#fields" id="fields" style="color: inherit; text-decoration: none;">
-  <h2>Fields</h2>
-</a>
-<p>If you want to save request logging to mongodb, this is the fields description, which you will used to create a mongoose schema:  </p>
+<a id="md:api" class="tsd-anchor"></a><h2 class="tsd-anchor-link">API<a href="#md:api" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>See <a href="https://request-log.vercel.app/functions/middleware.html">api</a> document.</p>
+<a id="md:fields" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Fields<a href="#md:fields" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>If you want to save request logging to mongodb, this is the fields description, which you will used to create a mongoose schema:</p>
 <table>
 <thead>
 <tr>
@@ -37,7 +18,8 @@
 <th>description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>hostname</td>
 <td>String</td>
 <td>The domain of current server.</td>
@@ -50,7 +32,12 @@
 <tr>
 <td>path</td>
 <td>String</td>
-<td>The request path doesn&#39;t contain query string.</td>
+<td>The request path doesn't contain query string.</td>
+</tr>
+<tr>
+<td>router</td>
+<td>String</td>
+<td>The request router for express.</td>
 </tr>
 <tr>
 <td>user_agent</td>
@@ -60,7 +47,12 @@
 <tr>
 <td>custom_headers</td>
 <td>Object</td>
-<td>The specific you wanna save.</td>
+<td>The specific headers you wanna save.</td>
+</tr>
+<tr>
+<td>custom_envs</td>
+<td>Object</td>
+<td>The specific env variables you wanna save.</td>
 </tr>
 <tr>
 <td>method</td>
@@ -70,12 +62,12 @@
 <tr>
 <td>ip</td>
 <td>String</td>
-<td>The client&#39;s ip.</td>
+<td>The client's ip.</td>
 </tr>
 <tr>
 <td>host</td>
 <td>String</td>
-<td>The server&#39;s ip.</td>
+<td>The server's ip.</td>
 </tr>
 <tr>
 <td>duration</td>
@@ -85,7 +77,7 @@
 <tr>
 <td>pid</td>
 <td>Number</td>
-<td>The server&#39;s process id.</td>
+<td>The server's process id.</td>
 </tr>
 <tr>
 <td>req_id</td>
@@ -147,13 +139,15 @@
 <td>Boolean</td>
 <td>Whether the request has aborted.</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>We suggest you use such mongoose schema, which is compatible when the fields is changed:</p>
-<pre><code class="language-javascript"><span class="hl-0">const</span><span class="hl-1"> {</span><span class="hl-2">Schema</span><span class="hl-1">} = </span><span class="hl-3">require</span><span class="hl-1">(</span><span class="hl-4">&#39;mongoose&#39;</span><span class="hl-1">);</span><br/><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">requestLogSchema</span><span class="hl-1"> =  </span><span class="hl-0">new</span><span class="hl-1"> </span><span class="hl-3">Schema</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-5">req_time:</span><span class="hl-1"> </span><span class="hl-7">Date</span><br/><span class="hl-1">},{ </span><br/><span class="hl-1">    </span><span class="hl-5">timestamps:</span><span class="hl-1"> {</span><br/><span class="hl-1">        </span><span class="hl-5">createdAt:</span><span class="hl-1"> </span><span class="hl-4">&#39;created_at&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">        </span><span class="hl-5">updatedAt :</span><span class="hl-1"> </span><span class="hl-4">&#39;updated_at&#39;</span><br/><span class="hl-1">    },</span><br/><span class="hl-1">    </span><span class="hl-5">strict:</span><span class="hl-1"> </span><span class="hl-0">false</span><br/><span class="hl-1">});</span><br/><span class="hl-7">module</span><span class="hl-1">.</span><span class="hl-7">exports</span><span class="hl-1"> = </span><span class="hl-5">requestLogSchema</span><span class="hl-1">;</span>
-</code></pre>
+<pre><code class="javascript"><span class="hl-0">const</span><span class="hl-1"> {</span><span class="hl-2">Schema</span><span class="hl-1">} = </span><span class="hl-3">require</span><span class="hl-1">(</span><span class="hl-4">&#39;mongoose&#39;</span><span class="hl-1">);</span><br/><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">requestLogSchema</span><span class="hl-1"> =  </span><span class="hl-0">new</span><span class="hl-1"> </span><span class="hl-3">Schema</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-5">req_time:</span><span class="hl-1"> </span><span class="hl-5">Date</span><br/><span class="hl-1">},{ </span><br/><span class="hl-1">    </span><span class="hl-5">timestamps:</span><span class="hl-1"> {</span><br/><span class="hl-1">        </span><span class="hl-5">createdAt:</span><span class="hl-1"> </span><span class="hl-4">&#39;created_at&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">        </span><span class="hl-5">updatedAt :</span><span class="hl-1"> </span><span class="hl-4">&#39;updated_at&#39;</span><br/><span class="hl-1">    },</span><br/><span class="hl-1">    </span><span class="hl-5">strict:</span><span class="hl-1"> </span><span class="hl-0">false</span><br/><span class="hl-1">});</span><br/><span class="hl-7">module</span><span class="hl-1">.</span><span class="hl-7">exports</span><span class="hl-1"> = </span><span class="hl-5">requestLogSchema</span><span class="hl-1">;</span>
+</code><button type="button">Copy</button></pre>
 
-<a href="#license" id="license" style="color: inherit; text-decoration: none;">
-  <h2>License</h2>
-</a>
-<p><a href="https://github.com/yunnysunny/request-log/blob/HEAD/LICENSE">MIT</a></p>
-</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="modules.html#FormatFunction" class="tsd-kind-icon">Format<wbr/>Function</a></li><li class="tsd-kind-function"><a href="modules.html#export_" class="tsd-kind-icon">export=</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
+<a id="md:breaking-changes-on-016x" class="tsd-anchor"></a><h2 class="tsd-anchor-link">Breaking changes on 0.16.x<a href="#md:breaking-changes-on-016x" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><ol>
+<li>Remove <code>kafkaSchedule</code> <code>mongooseModel</code> <code>alarm</code> option, please use <code>onReqFinished</code> instead.</li>
+<li>The default <code>dataFormat</code> function will use JSON.stringify to return string, since it's safe for elasticsearch. If you want to return with you own format, please pass the <code>dataFormat</code> parameter yourself.</li>
+</ol>
+<a id="md:license" class="tsd-anchor"></a><h2 class="tsd-anchor-link">License<a href="#md:license" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p><a href="https://github.com/yunnysunny/request-log/blob/HEAD/LICENSE">MIT</a></p>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="assets/icons.svg#icon-chevronDown"></use></svg>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="assets/icons.svg#icon-chevronDown"></use></svg>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#md:request-logging"><span>request-<wbr/>logging</span></a><ul><li><a href="#md:installation"><span>Installation</span></a></li><li><a href="#md:usage"><span>Usage</span></a></li><li><a href="#md:api"><span>API</span></a></li><li><a href="#md:fields"><span>Fields</span></a></li><li><a href="#md:breaking-changes-on-016x"><span>Breaking changes on 0.16.x</span></a></li><li><a href="#md:license"><span>License</span></a></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="modules.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="assets/icons.svg#icon-1"></use></svg><span>@yunnysunny/request-logging</span></a><ul class="tsd-small-nested-navigation" id="tsd-nav-container" data-base="."><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div></body></html>
