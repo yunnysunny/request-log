@@ -61,9 +61,6 @@
     "sourceMap": true,
     "instrument": true
   },
-  "dependencies": {
-    "ip": "^1.1.9"
-  },
   "devDependencies": {
     "@types/chai": "^4.3.17",
     "@types/express": "^4.17.13",
@@ -92,5 +89,8 @@
     "typedoc": "^0.26.5",
     "typedoc-plugin-rename-defaults": "^0.7.1",
     "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "ip": "^2.0.1"
   }
 }
