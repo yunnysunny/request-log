@@ -8,7 +8,7 @@ on:
     types: [created]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     services:
       mongo:
@@ -27,9 +27,10 @@ jobs:
       - run: cp test/express/config.example.json test/express/config.json
       - run: yarn install
       - run: npm test
+      - run: npm run build
 
   publish-npm:
-    needs: build
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -37,7 +38,7 @@ jobs:
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org/
-      - run: yarn install && npm run doc
+      - run: yarn install && npm run build && npm run doc
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
