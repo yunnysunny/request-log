@@ -39,11 +39,16 @@ jobs:
           node-version: 18
           registry-url: https://registry.npmjs.org/
       - run: yarn install && npm run build && npm run doc
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
+          # Upload entire repository
+          path: './docs'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
