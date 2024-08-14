@@ -229,8 +229,8 @@ export default function middleware({
             // }
 
             if (!stdoutDisabled) {
-                logger.info(`${ip} ${duration} ms ${content_length_req} 
-"${method} ${original_url} HTTP/${req.httpVersion}" ${status_code} ${content_length} 
+                logger.info(`${ip} ${duration} ms ${content_length_req} \
+"${method} ${original_url} HTTP/${req.httpVersion}" ${status_code} ${content_length} \
 "${referer}" "${user_agent}"`);
             }
         }
