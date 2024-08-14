@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+import crypto from 'crypto';
 
 const routes = require('./routes/index');
 
@@ -27,6 +28,9 @@ app.use(requestLog({
     },
     dataFormat: (data, isRes, req) => {
         return data;
+    },
+    genId: () => {
+        return crypto.randomBytes(16).toString('hex');
     },
     customHeaderKeys: [CUSTOM_HEADER_KEY_MY_ID],
     customEnvNames: ['NODE_ENV'],

@@ -150,7 +150,7 @@ export default function middleware({
             const path = req.path;
             const content_length = Number(res.get('content-length')) || -1;
             const status_code = res.statusCode;
-            const res_code = Number(res.get('res-code')) || 0;
+            const res_code = Number(res.get('res-code')) || res.locals._res_code || 0;
             const content_length_req = Number(req.get('content-length')) || 0;
             const req_data_original = method === 'POST' ? req.body : req.query;
             const req_data = dataFormat(req_data_original, false, req);

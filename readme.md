@@ -1,6 +1,6 @@
 # request-logging
 
-Print the express request log to console and save it to kafka and mongodb when required, and even can send alram message when the response code greater than 500.
+Print the express request log to console or save it to external data source by providing `onReqFinished` callback function. 
 
 [![npm version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
@@ -56,7 +56,8 @@ If you want to save request logging to mongodb, this is the fields description, 
 
 | name           | type   | description                                                  |
 | -------------- | ------ | ------------------------------------------------------------ |
-| hostname       | String | The domain of current server.                                |
+| req_id         | String | The unique id for one log record, can been changed by given `genId` function.|
+| domain         | String | The domain of current server.                                |
 | original_url   | String | The original url contains query string.                      |
 | path           | String | The request path doesn't contain query string.               |
 | router         | String | The request router for express.                              |
@@ -65,18 +66,19 @@ If you want to save request logging to mongodb, this is the fields description, 
 | custom_envs    | Object | The specific env variables you wanna save.                   | 
 | method         | String | The http request method.                                     |
 | ip             | String | The client's ip.                                             |
-| host           | String | The server's ip.                                             |
+| server_ip      | String | The server's ip.                                             |
+| server_host    | String | The server's hostname.                                       |
 | duration       | Number | The millisecond the request costed.                          |
 | pid            | Number | The server's process id.                                     |
-| req_id         | Number | The inner request number, auto increased when new request come. |
+| req_seq        | Number | The inner request number, auto increased when new request come. |
 | content_length_req | Number | The content-length of the request headers.                  |
 | content_length | Number | The content-length of the response headers.                  |
 | status_code    | Number | The status code of current HTTP response.                    |
-| res_code       | Number | The inner response code, which will be got from the response header of `res-code`. |
-| res_data       | Object | The reponse data.                                            |
+| res_code       | Number | The inner response code, which will been get from the response header of `res-code` or `res.locals._res_code`. |
+| res_data       | String/any | The response data, which will been get from `res.locals._res_data`. |
 | req_time       | Number | The timestamp of begin time of current request occured.      |
-| req_time_string| String | The time of begin time, formated in [ISO 8601 Extended Format](https://en.wikipedia.org/wiki/ISO_8601). | 
-| req_data       | Object | The request data, which would form query string or form data. |
+| req_time_string| String | The time of begin time, formatted in [ISO 8601 Extended Format](https://en.wikipedia.org/wiki/ISO_8601). | 
+| req_data       | String/any | The request data, which would form query string or form data. |
 | referer        | String | The HTTP referer header.                                     |
 | session        | Object | The session of current request.                              |
 | aborted        | Boolean| Whether the request has aborted.                             | 
@@ -98,7 +100,12 @@ const requestLogSchema =  new Schema({
 module.exports = requestLogSchema;
 ```
 
-## Breaking changes on 0.16.x
+## Breaking changes
+### 0.17.x
+1. `req_id` is now an unique string, the original `req_id` has renamed to `req-seq`.
+2. `host` is renamed to `server_ip`.
+3. `hostname` is renamed to `domain`.
+### 0.16.x
 1. Remove `kafkaSchedule` `mongooseModel` `alarm` option, please use `onReqFinished` instead.
 2. The default `dataFormat` function will use JSON.stringify to return string, since it's safe for elasticsearch. If you want to return with you own format, please pass the `dataFormat` parameter yourself. 
 

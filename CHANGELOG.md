@@ -1,3 +1,11 @@
+# v0.17.0
+## Breaking changes
+1. `req_id` is now an unique string, the original `req_id` has renamed to `req-seq`.
+2. `host` is renamed to `server_ip`.
+3. `hostname` is renamed to `domain`.
+## Add
+1. Add `server_host` field.
+2. Add `genId` function parameter to generate custom log id.
 # v0.16.0
 ## Breaking changes
 1. Remove `kafkaSchedule` `mongooseModel` `alarm` option, please use `onReqFinished` instead.

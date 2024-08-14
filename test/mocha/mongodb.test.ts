@@ -9,7 +9,7 @@ const {
 } = require('../express/src/config');
 const MY_ID = Math.random() + '';
 process.env.NODE_ENV = 'test';
-describe.only('mongodb test:', function() {
+describe('mongodb test:', function() {
     it('success when request ' + reqUrl + ' ok', async function() {
         await request(app)
             .get(reqUrl)
@@ -25,7 +25,7 @@ describe.only('mongodb test:', function() {
 
     it('the latest url is ' + reqUrl, async function() {
         const item = await requestLogModel.findOne({}, {
-            original_url: 1, custom_headers: 1, custom_envs: 1
+            original_url: 1, custom_headers: 1, custom_envs: 1, req_id: 1
         }, {
             sort: { _id: -1 }, lean: true
         }).exec();
@@ -37,6 +37,7 @@ describe.only('mongodb test:', function() {
         expect(item.original_url).equal(reqUrl);
         expect(item.custom_headers).to.have.property(CUSTOM_HEADER_KEY_MY_ID).and.equal(MY_ID);
         expect(item.custom_envs).to.have.property('NODE_ENV').and.equal('test');
+        expect(item.req_id).to.be.a('string').to.have.lengthOf(32);
     });
 
     it('success request when request /do-get-res-code', async function() {
