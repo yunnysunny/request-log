@@ -48,7 +48,7 @@ app.use(bodyParser.urlencoded({
 
 ## API
 
-See [api](https://request-log.vercel.app/functions/middleware.html) document.
+See [api](https://request-log.whyun.com/functions/middleware.html) document.
 
 ## Fields
 
